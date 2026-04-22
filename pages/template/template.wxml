@@ -1,0 +1,51 @@
+<page-bg />
+
+<view class="container">
+  <view class="sticky-header">
+    <view class="page-title">模板广场</view>
+    <scroll-view class="category-row" scroll-x enable-flex>
+      <view class="category-inner">
+        <block wx:for="{{categories}}" wx:key="*this">
+          <view
+            class="category-chip {{selectedCategory === item ? 'category-chip-active' : ''}}"
+            data-category="{{item}}"
+            bindtap="selectCategory"
+            style="{{selectedCategory === item ? 'background:' + theme.primary + '; border-color:' + theme.primary + ';' : 'color:' + theme.primaryDark + '; border-color:#e8eaf1;'}}"
+          >
+            {{item}}
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="content-wrap">
+    <view class="empty-box" wx:if="{{!templates.length}}">
+      <view class="muted">{{'当前分类暂无模板'}}</view>
+    </view>
+  </view>
+
+  <view class="tpl-grid">
+    <block wx:for="{{templates}}" wx:key="id">
+      <view class="card tpl-card">
+        <view class="card-head">
+          <view class="icon-wrap">{{item.icon}}</view>
+          <view class="tpl-title">{{item.title}}</view>
+          <view class="head-actions" wx:if="{{item.source === 'custom'}}">
+            <button class="head-action-btn" catchtap="openEditEditor" data-id="{{item.id}}">编辑</button>
+            <button class="head-action-btn" catchtap="removeCustomTemplate" data-id="{{item.id}}">删除</button>
+          </view>
+        </view>
+        <view class="tpl-question">{{item.question}}</view>
+
+        <view class="meta-row">
+          <view class="meta-item">▦ {{item.options.length}} 个选项</view>
+          <view class="meta-item" style="color: {{theme.primary}};">↗ {{item.usageCount || 0}}</view>
+        </view>
+
+        <button class="primary-btn use-btn" bindtap="useTemplate" data-idx="{{index}}" style="background: {{theme.primary}};">使用</button>
+
+      </view>
+    </block>
+  </view>
+</view>

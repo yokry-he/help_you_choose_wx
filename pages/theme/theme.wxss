@@ -1,0 +1,148 @@
+.theme-page {
+  padding-top: 8rpx;
+}
+
+.current-card {
+  border-radius: 22rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  color: #ffffff;
+  min-height: 248rpx;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.current-sub {
+  font-size: 26rpx;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
+}
+
+.current-name {
+  margin-top: 8rpx;
+  font-size: 42rpx;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.16) 1px,
+    transparent 1px
+  );
+  background-size: 18rpx 18rpx;
+  opacity: 0.35;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.b1 {
+  width: 210rpx;
+  height: 210rpx;
+  right: -24rpx;
+  top: -22rpx;
+}
+
+.b2 {
+  width: 118rpx;
+  height: 118rpx;
+  left: 26rpx;
+  top: 24rpx;
+}
+
+.b3 {
+  width: 150rpx;
+  height: 150rpx;
+  right: 170rpx;
+  top: 54rpx;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.b4 {
+  width: 88rpx;
+  height: 88rpx;
+  right: 56rpx;
+  bottom: 16rpx;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.star {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 22rpx;
+}
+
+.s1 {
+  right: 108rpx;
+  top: 28rpx;
+}
+
+.s2 {
+  right: 44rpx;
+  top: 108rpx;
+}
+
+.theme-item {
+  margin-bottom: 14rpx;
+  border-radius: 22rpx;
+  padding: 24rpx 24rpx;
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+}
+
+.item-main {
+  flex: 1;
+}
+
+.item-title {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #1f2430;
+}
+
+.item-line {
+  margin-top: 8rpx;
+  width: 180rpx;
+  height: 8rpx;
+  border-radius: 999rpx;
+}
+
+.using-tag {
+  min-width: 98rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  border-radius: 999rpx;
+  color: #ffffff;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.item-arrow {
+  color: #c2c9d6;
+  font-size: 34rpx;
+  line-height: 1;
+}

@@ -1,0 +1,20 @@
+<view class="custom-tabbar">
+  <block wx:for="{{list}}" wx:key="pagePath">
+    <view class="tab-item" data-index="{{index}}" data-path="{{item.pagePath}}" bindtap="switchTab">
+      <view class="tab-icon-wrap {{selected === index ? 'active' : ''}}" style="{{selected === index ? 'color: ' + selectedColor : 'color: ' + color}}">
+        <view wx:if="{{item.iconType === 'home'}}" class="icon-home"></view>
+        <view wx:if="{{item.iconType === 'grid'}}" class="icon-grid">
+          <view class="grid-dot"></view><view class="grid-dot"></view>
+          <view class="grid-dot"></view><view class="grid-dot"></view>
+        </view>
+        <view wx:if="{{item.iconType === 'history'}}" class="icon-history">
+          <view class="history-arrow"></view>
+        </view>
+        <view wx:if="{{item.iconType === 'profile'}}" class="icon-profile"></view>
+      </view>
+      <view class="tab-text {{selected === index ? 'active' : ''}}" style="{{selected === index ? 'color: ' + selectedColor : 'color: ' + color}}">
+        {{item.text}}
+      </view>
+    </view>
+  </block>
+</view>

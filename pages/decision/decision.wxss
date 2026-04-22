@@ -1,0 +1,92 @@
+.field-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 14rpx;
+}
+
+.question-input {
+  background: #f8f9fc;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.row-head {
+  margin: 20rpx 0 12rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.row-head .field-title {
+  margin-bottom: 0;
+}
+
+.add-option-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0 0 0 auto;
+}
+
+.floating-add-btn {
+  position: fixed;
+  top: calc(env(safe-area-inset-top) + 16rpx);
+  right: 24rpx;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 6rpx 18rpx rgba(30, 36, 52, 0.12);
+}
+
+.mini-btn {
+  padding: 0 20rpx;
+  min-height: 60rpx;
+  line-height: 58rpx;
+  font-size: 24rpx;
+}
+
+.option-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+  padding: 16rpx 20rpx;
+}
+
+.option-index {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 999rpx;
+  background: #fff4ef;
+  color: #ff8c69;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12rpx;
+  font-size: 24rpx;
+}
+
+.option-input {
+  flex: 1;
+}
+
+.remove-btn {
+  margin-left: 12rpx;
+  font-size: 24rpx;
+  color: #a3a9b6;
+  border: none;
+  background: transparent;
+}
+
+.action-btn {
+  margin-top: 20rpx;
+}
+

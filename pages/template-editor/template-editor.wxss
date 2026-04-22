@@ -1,0 +1,72 @@
+.container {
+  padding: 20rpx 20rpx 28rpx;
+}
+
+.field-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+  color: #1f2430;
+}
+
+.question-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: #f8f9fc;
+  border-radius: 16rpx;
+  padding: 18rpx;
+  font-size: 34rpx;
+}
+
+.row-head {
+  margin: 20rpx 4rpx 12rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mini-btn {
+  min-height: 62rpx;
+  line-height: 60rpx;
+  padding: 0 22rpx;
+  font-size: 28rpx;
+}
+
+.option-card {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 14rpx;
+  margin-bottom: 10rpx;
+}
+
+.option-index {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 999rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 700;
+}
+
+.option-input {
+  flex: 1;
+  min-width: 0;
+  font-size: 32rpx;
+}
+
+.remove-btn {
+  min-height: 56rpx;
+  line-height: 54rpx;
+  padding: 0 16rpx;
+  font-size: 24rpx;
+}
+
+.save-btn {
+  margin-top: 18rpx;
+  min-height: 84rpx;
+  line-height: 82rpx;
+  font-size: 40rpx;
+}

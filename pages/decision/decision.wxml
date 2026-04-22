@@ -1,0 +1,71 @@
+<page-bg />
+
+<view class="container">
+  <view class="card">
+    <view class="field-title">你纠结的问题是？</view>
+    <textarea
+      class="question-input"
+      placeholder="例如：今天中午吃什么？"
+      auto-height
+      maxlength="120"
+      value="{{question}}"
+      bindinput="onQuestionInput"
+    />
+  </view>
+
+  <view class="row-head" id="option-head">
+    <view class="field-title">备选方案</view>
+  <button
+    class="ghost-btn mini-btn add-option-btn"
+    bindtap="addOption"
+    style="color: {{theme.primary}}; border-color: {{theme.primary}};"
+  >
+    添加选项
+  </button>
+  </view>
+
+  <block wx:for="{{options}}" wx:key="index">
+  <view class="card option-card" id="option-card-{{index}}">
+      <view class="option-index" style="background: {{optionBadgeBg}}; color: {{theme.primary}};">{{index + 1}}</view>
+      <input
+        class="option-input"
+        placeholder="选项 {{index + 1}}"
+        value="{{item}}"
+        focus="{{focusIndex === index}}"
+        cursor-spacing="280"
+        bindinput="onOptionInput"
+        bindfocus="onOptionFocus"
+        data-idx="{{index}}"
+      />
+      <button
+        class="remove-btn"
+        wx:if="{{options.length > 2}}"
+        bindtap="removeOption"
+        data-idx="{{index}}"
+      >
+        删除
+      </button>
+    </view>
+  </block>
+
+  <button
+    class="primary-btn action-btn"
+    bindtap="makeChoice"
+    loading="{{isChoosing}}"
+    disabled="{{isChoosing}}"
+    style="background: {{theme.primary}};"
+  >
+    {{isChoosing ? "正在抽选…" : "帮我选"}}
+  </button>
+</view>
+
+<button
+  wx:if="{{showFloatingAddButton}}"
+  class="ghost-btn mini-btn floating-add-btn"
+  bindtap="addOption"
+  style="color: {{theme.primary}}; border-color: {{theme.primary}};"
+>
+  添加选项
+</button>
+
+<wheel-overlay id="wheelOverlay" bindcomplete="onWheelComplete" />

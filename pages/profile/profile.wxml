@@ -1,0 +1,31 @@
+<page-bg />
+
+<view class="container profile-page">
+  <view class="hero" style="background: linear-gradient(135deg, {{theme.primaryLight}}, {{theme.primary}});">
+    <view class="hero-bubbles">
+      <view class="hero-noise"></view>
+      <view class="bubble b1"></view>
+      <view class="bubble b2"></view>
+      <view class="bubble b3"></view>
+      <view class="bubble b4"></view>
+      <view class="star s1">✦</view>
+      <view class="star s2">✦</view>
+    </view>
+    <view class="hero-icon">🏆</view>
+    <view class="hero-title">纠结星人</view>
+    <view class="hero-sub">帮你做出更好的选择</view>
+  </view>
+
+  <block wx:for="{{menuItems}}" wx:key="key">
+    <view class="card menu-card" bindtap="goMenuPage" data-path="{{item.path}}">
+      <view class="menu-left">
+        <view class="menu-icon" style="color: {{theme.primary}};">{{item.icon}}</view>
+        <view class="menu-main">
+          <view class="menu-title">{{item.title}}</view>
+          <view class="menu-desc">{{item.desc}}</view>
+        </view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </block>
+</view>

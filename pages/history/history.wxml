@@ -1,0 +1,80 @@
+<page-bg />
+
+<view class="container">
+  <view class="page-head">
+    <view class="page-title">历史记录</view>
+    <view
+      wx:if="{{list.length}}"
+      class="head-icon-btn"
+      bindtap="clearAll"
+      style="color: {{theme.primary}};"
+    >
+      <view class="icon-delete"></view>
+    </view>
+  </view>
+
+  <view wx:if="{{!list.length}}" class="empty-box">
+    <view class="muted">当前暂无历史记录</view>
+  </view>
+
+  <block wx:for="{{list}}" wx:key="id">
+    <view class="card history-card" bindtap="reuse" data-id="{{item.id}}">
+      <view class="card-top">
+        <view class="left-icon">{{item.icon}}</view>
+        <view class="main-info">
+          <view class="question">{{item.question}}</view>
+          <view class="time">{{item.timeText}}</view>
+        </view>
+        <view class="right-tools">
+          <button
+            class="icon-tool-btn"
+            catchtap="saveAsTemplate"
+            data-id="{{item.id}}"
+            style="color: {{theme.primary}};"
+          >
+            <view class="icon-save-template">
+              <view class="save-plus">+</view>
+            </view>
+          </button>
+          <button
+            class="icon-tool-btn"
+            catchtap="remove"
+            data-id="{{item.id}}"
+            style="color: {{theme.primary}};"
+          >
+            <view class="icon-delete"></view>
+          </button>
+        </view>
+      </view>
+      <view class="result-row" style="background: {{theme.primaryLight}}22;">
+        <view class="result-left">
+          <text class="result-check" style="color: {{theme.primary}};">◉</text>
+          <text class="result-label" style="color: {{theme.primary}};">选择了：{{item.result}}</text>
+        </view>
+        <text class="result-arrow">›</text>
+      </view>
+    </view>
+  </block>
+
+  <view class="save-mask" wx:if="{{showSaveDialog}}" bindtap="closeSaveDialog">
+    <view class="save-panel" catchtap="noop">
+      <view class="save-title">保存为自定义模版</view>
+      <view class="save-field-wrap">
+        <view class="save-field-label" style="color: {{theme.primary}};">模版标题</view>
+        <input
+          class="save-input"
+          value="{{saveTitle}}"
+          maxlength="{{maxTitleLength}}"
+          focus
+          bindinput="onSaveTitleInput"
+          style="border-color: {{theme.primary}};"
+        />
+      </view>
+      <view class="save-counter">{{saveTitle.length}}/{{maxTitleLength}}</view>
+      <view class="save-actions">
+        <button class="save-cancel-btn" bindtap="closeSaveDialog" style="color: {{theme.primary}};">取消</button>
+        <button class="save-confirm-btn" bindtap="confirmSaveTemplate" style="background: {{theme.primary}};">保存</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,112 @@
+.custom-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 112rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  display: flex;
+  background: #ffffff;
+  border-top: 1rpx solid #eceff4;
+  z-index: 999;
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rpx;
+}
+
+.tab-icon-wrap {
+  width: 42rpx;
+  height: 42rpx;
+  color: inherit;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tab-text {
+  font-size: 22rpx;
+  line-height: 1.15;
+}
+
+.active {
+  font-weight: 700;
+}
+
+.icon-home {
+  width: 24rpx;
+  height: 20rpx;
+  border: 2.6rpx solid currentColor;
+  border-top: none;
+  border-radius: 4rpx;
+  position: relative;
+}
+
+.icon-home::before {
+  content: "";
+  position: absolute;
+  top: -13rpx;
+  left: -2.6rpx;
+  width: 0;
+  height: 0;
+  border-left: 14rpx solid transparent;
+  border-right: 14rpx solid transparent;
+  border-bottom: 13rpx solid currentColor;
+}
+
+.icon-grid {
+  width: 30rpx;
+  height: 30rpx;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4rpx;
+}
+
+.grid-dot {
+  border: 2.6rpx solid currentColor;
+  border-radius: 4rpx;
+}
+
+.icon-history {
+  width: 28rpx;
+  height: 28rpx;
+  border: 2.6rpx solid currentColor;
+  border-radius: 50%;
+  position: relative;
+}
+
+.history-arrow {
+  position: absolute;
+  top: -4rpx;
+  right: 8rpx;
+  width: 0;
+  height: 0;
+  border-left: 5rpx solid transparent;
+  border-right: 5rpx solid transparent;
+  border-bottom: 8rpx solid currentColor;
+}
+
+.icon-profile {
+  width: 28rpx;
+  height: 28rpx;
+  border: 2.6rpx solid currentColor;
+  border-radius: 50%;
+  position: relative;
+}
+
+.icon-profile::before {
+  content: "";
+  position: absolute;
+  left: 8rpx;
+  top: 4rpx;
+  width: 10rpx;
+  height: 10rpx;
+  border: 2.6rpx solid currentColor;
+  border-radius: 50%;
+}

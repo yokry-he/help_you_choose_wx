@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "帮我选择",
+  "usingComponents": {
+    "wheel-overlay": "/components/wheel-overlay/index"
+  }
+}

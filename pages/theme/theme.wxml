@@ -1,0 +1,29 @@
+<page-bg />
+
+<view class="container theme-page">
+  <view class="current-card" style="background: linear-gradient(135deg, {{currentTheme.primaryLight}}, {{currentTheme.primary}});">
+    <view class="hero-bubbles">
+      <view class="hero-noise"></view>
+      <view class="bubble b1"></view>
+      <view class="bubble b2"></view>
+      <view class="bubble b3"></view>
+      <view class="bubble b4"></view>
+      <view class="star s1">✦</view>
+      <view class="star s2">✦</view>
+    </view>
+    <view class="current-sub">当前主题</view>
+    <view class="current-name">{{currentTheme.icon}} {{currentTheme.name}}</view>
+  </view>
+
+  <block wx:for="{{themes}}" wx:key="name">
+    <view class="card theme-item" data-idx="{{index}}" bindtap="chooseTheme">
+      <view class="dot" style="background: linear-gradient(135deg, {{item.primaryLight}}, {{item.primary}});"></view>
+      <view class="item-main">
+        <view class="item-title">{{item.icon}} {{item.name}}</view>
+        <view class="item-line" style="background: {{item.primary}};"></view>
+      </view>
+      <view wx:if="{{settings.themeIndex === index}}" class="using-tag" style="background: {{item.primary}};">使用中</view>
+      <view wx:else class="item-arrow">›</view>
+    </view>
+  </block>
+</view>

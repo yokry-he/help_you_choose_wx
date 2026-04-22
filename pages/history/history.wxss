@@ -1,0 +1,288 @@
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14rpx;
+}
+
+.page-title {
+  font-size: 42rpx;
+  font-weight: 700;
+  color: #1f2430;
+}
+
+.head-icon-btn {
+  margin-left: auto;
+  width: 60rpx;
+  min-width: 60rpx;
+  height: 60rpx;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.empty-box {
+  padding: 72rpx 24rpx 0;
+  text-align: center;
+}
+
+.history-card {
+  margin-bottom: 16rpx;
+  border-radius: 26rpx;
+  padding: 20rpx;
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.left-icon {
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 16rpx;
+  background: #f4eefc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  flex-shrink: 0;
+}
+
+.main-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.question {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #1f2430;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time {
+  margin-top: 4rpx;
+  color: #a9b1c1;
+  font-size: 24rpx;
+}
+
+.right-tools {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.icon-tool-btn {
+  width: 60rpx;
+  min-width: 60rpx;
+  height: 60rpx;
+  border: none;
+  background: transparent;
+  border-radius: 14rpx;
+  color: #b6becc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.icon-tool-btn::after {
+  border: none;
+}
+
+.icon-save-template {
+  width: 26rpx;
+  height: 32rpx;
+  border: 2rpx solid currentColor;
+  border-radius: 4rpx;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.icon-save-template::before {
+  content: "";
+  position: absolute;
+  left: 4rpx;
+  right: 4rpx;
+  top: 5rpx;
+  border-top: 2rpx solid currentColor;
+}
+
+.save-plus {
+  position: absolute;
+  right: -12rpx;
+  top: -10rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2rpx solid currentColor;
+  color: currentColor;
+  font-size: 16rpx;
+  line-height: 18rpx;
+  text-align: center;
+  font-weight: 700;
+}
+
+.icon-delete {
+  width: 24rpx;
+  height: 24rpx;
+  border: 2rpx solid currentColor;
+  border-top: none;
+  border-radius: 0 0 4rpx 4rpx;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.icon-delete::before {
+  content: "";
+  position: absolute;
+  left: -4rpx;
+  right: -4rpx;
+  top: -8rpx;
+  border-top: 2rpx solid currentColor;
+}
+
+.icon-delete::after {
+  content: "";
+  position: absolute;
+  width: 10rpx;
+  left: 50%;
+  margin-left: -5rpx;
+  top: -12rpx;
+  border-top: 2rpx solid currentColor;
+}
+
+.result-row {
+  margin-top: 16rpx;
+  min-height: 62rpx;
+  border-radius: 14rpx;
+  padding: 0 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.result-left {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.result-check {
+  font-size: 26rpx;
+  margin-right: 10rpx;
+}
+
+.result-label {
+  font-size: 30rpx;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result-arrow {
+  color: #b5becc;
+  font-size: 36rpx;
+  line-height: 1;
+}
+
+.save-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(0, 0, 0, 0.42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22rpx;
+  box-sizing: border-box;
+}
+
+.save-panel {
+  width: 100%;
+  max-width: 680rpx;
+  border-radius: 28rpx;
+  background: #ffffff;
+  padding: 28rpx 28rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.save-title {
+  font-size: 36rpx;
+  color: #1f2430;
+  font-weight: 500;
+}
+
+.save-field-wrap {
+  margin-top: 22rpx;
+  position: relative;
+}
+
+.save-field-label {
+  position: absolute;
+  top: -18rpx;
+  left: 22rpx;
+  font-size: 30rpx;
+  line-height: 1;
+  background: #ffffff;
+  padding: 0 8rpx;
+}
+
+.save-input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 88rpx;
+  border-radius: 26rpx;
+  border: 4rpx solid #9563dc;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  color: #1f2430;
+}
+
+.save-counter {
+  margin-top: 10rpx;
+  text-align: right;
+  color: #263144;
+  font-size: 28rpx;
+}
+
+.save-actions {
+  margin-top: 24rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.save-actions button {
+  margin: 0;
+}
+
+.save-cancel-btn {
+  width: 180rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border: none;
+  background: transparent;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.save-confirm-btn {
+  width: 220rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  border: none;
+  border-radius: 24rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 500;
+}

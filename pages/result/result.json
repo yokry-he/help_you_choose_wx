@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "选择结果",
+  "usingComponents": {
+    "wheel-overlay": "/components/wheel-overlay/index"
+  }
+}

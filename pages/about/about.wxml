@@ -1,0 +1,32 @@
+<page-bg />
+
+<view class="container about-page">
+  <view class="app-logo" style="background: {{theme.primary}};">
+    <text>❔</text>
+  </view>
+  <view class="app-name">Help You Choose</view>
+  <view class="app-version">Version 1.0.0</view>
+
+  <view class="card section-card">
+    <view class="section-title">应用介绍</view>
+    <block wx:for="{{intro}}" wx:key="*this">
+      <view class="section-text">{{item}}</view>
+    </block>
+  </view>
+
+  <view class="card section-card">
+    <view class="section-title">功能特色</view>
+    <block wx:for="{{features}}" wx:key="*this">
+      <view class="feature-line">{{item}}</view>
+    </block>
+  </view>
+
+  <view class="card section-card">
+    <view class="section-title">开发团队</view>
+    <block wx:for="{{team}}" wx:key="*this">
+      <view class="section-text">{{item}}</view>
+    </block>
+  </view>
+
+  <view class="copyright">© 2026 Help You Choose. All rights reserved.</view>
+</view>

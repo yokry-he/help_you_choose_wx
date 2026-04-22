@@ -1,0 +1,44 @@
+<page-bg />
+
+<view class="container">
+  <view class="card">
+    <view class="field-title">你纠结的问题是？</view>
+    <textarea
+      class="question-input"
+      placeholder="例如：今天吃什么好呢？"
+      auto-height
+      maxlength="120"
+      value="{{formQuestion}}"
+      bindinput="onQuestionInput"
+    />
+  </view>
+
+  <view class="row-head">
+    <view class="field-title">备选方案</view>
+    <button class="ghost-btn mini-btn" bindtap="addOptionField" style="color: {{theme.primary}}; border-color: {{theme.primary}};">添加选项</button>
+  </view>
+
+  <block wx:for="{{formOptions}}" wx:key="index">
+    <view class="card option-card">
+      <view class="option-index" style="background: {{indexBg}}; color: {{theme.primary}};">{{index + 1}}</view>
+      <input
+        class="option-input"
+        placeholder="选项 {{index + 1}}"
+        value="{{item}}"
+        data-idx="{{index}}"
+        bindinput="onOptionInput"
+      />
+      <button
+        class="ghost-btn remove-btn"
+        wx:if="{{formOptions.length > 2}}"
+        data-idx="{{index}}"
+        bindtap="removeOptionField"
+        style="color: {{theme.primary}}; border-color: {{theme.primary}};"
+      >
+        删除
+      </button>
+    </view>
+  </block>
+
+  <button class="primary-btn save-btn" bindtap="saveTemplate" style="background: {{theme.primary}};">保存模板</button>
+</view>

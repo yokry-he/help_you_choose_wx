@@ -1,0 +1,163 @@
+.help-page {
+  padding-top: 8rpx;
+}
+
+.hero {
+  border-radius: 20rpx;
+  padding: 22rpx 20rpx;
+  color: #ffffff;
+  margin-bottom: 16rpx;
+  min-height: 248rpx;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-title {
+  font-size: 38rpx;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-sub {
+  margin-top: 8rpx;
+  font-size: 28rpx;
+  opacity: 0.95;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tags {
+  margin-top: 14rpx;
+  display: flex;
+  gap: 10rpx;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tag {
+  padding: 8rpx 16rpx;
+  border-radius: 999rpx;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.15);
+  font-size: 24rpx;
+}
+
+.hero-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.16) 1px,
+    transparent 1px
+  );
+  background-size: 18rpx 18rpx;
+  opacity: 0.35;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.b1 {
+  width: 210rpx;
+  height: 210rpx;
+  right: -24rpx;
+  top: -22rpx;
+}
+
+.b2 {
+  width: 118rpx;
+  height: 118rpx;
+  left: 26rpx;
+  top: 24rpx;
+}
+
+.b3 {
+  width: 150rpx;
+  height: 150rpx;
+  right: 170rpx;
+  top: 54rpx;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.b4 {
+  width: 88rpx;
+  height: 88rpx;
+  right: 56rpx;
+  bottom: 16rpx;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.star {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 22rpx;
+}
+
+.s1 {
+  right: 108rpx;
+  top: 28rpx;
+}
+
+.s2 {
+  right: 44rpx;
+  top: 108rpx;
+}
+
+.faq-card {
+  margin-bottom: 14rpx;
+  border-radius: 20rpx;
+}
+
+.faq-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faq-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1f2430;
+  padding-right: 10rpx;
+}
+
+.faq-arrow {
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+.faq-body {
+  margin-top: 10rpx;
+  font-size: 30rpx;
+  line-height: 1.65;
+  color: #4a5568;
+}
+
+.cold-card {
+  margin-top: 4rpx;
+  border-radius: 20rpx;
+}
+
+.cold-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1f2430;
+}
+
+.cold-line {
+  margin-top: 8rpx;
+  font-size: 30rpx;
+  color: #4a5568;
+  line-height: 1.6;
+}

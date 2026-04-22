@@ -1,0 +1,84 @@
+<page-bg />
+
+<view class="container">
+  <view class="hero" style="background: linear-gradient(135deg, {{theme.primary}}, {{theme.primaryDark}});">
+    <view class="hero-bubbles">
+      <view class="hero-noise"></view>
+      <view class="bubble b1"></view>
+      <view class="bubble b2"></view>
+      <view class="bubble b3"></view>
+      <view class="bubble b4"></view>
+      <view class="star s1">✦</view>
+      <view class="star s2">✦</view>
+      <view class="star s3">✦</view>
+      <view class="face-shadow">◕ ◕</view>
+    </view>
+    <view class="hero-title">{{greetingText}}</view>
+    <view class="hero-subtitle">有什么难以决定的事情需要帮忙吗？</view>
+  </view>
+
+  <view class="card hero-action">
+    <view class="hero-action-title">选择困难终结者</view>
+    <view class="muted hero-action-subtitle">午饭吃啥、周末去哪，交给随机数，锅好甩一点</view>
+    <button class="primary-btn hero-start-btn" bindtap="goDecision" style="background: {{theme.primary}};">开始帮我选</button>
+  </view>
+
+  <view class="section-head">
+    <view class="section-title">🔥 热门模板</view>
+    <view class="section-link" style="color: {{theme.primary}};" bindtap="goTemplate">查看全部 ></view>
+  </view>
+  <view class="template-grid">
+    <block wx:for="{{hotTemplates}}" wx:key="key">
+      <view class="card template-item" bindtap="useHotTemplate" data-idx="{{index}}">
+        <view class="template-icon">{{item.icon}}</view>
+        <view class="template-title">{{item.title}}</view>
+      </view>
+    </block>
+  </view>
+
+  <view class="section-head">
+    <view class="section-title">最近记录</view>
+    <view class="section-link" style="color: {{theme.primary}};" bindtap="goHistory">查看全部 ></view>
+  </view>
+  <view class="empty-record card" wx:if="{{!recentList.length}}">
+    <view class="muted">还没有记录，先去抽一次吧</view>
+  </view>
+  <block wx:for="{{recentList}}" wx:key="id">
+    <view class="card record-item">
+      <view class="record-left">
+        <view class="record-icon" style="background: {{quickBg}};">{{item.icon}}</view>
+        <view class="record-main">
+          <view class="record-question">{{item.question}}</view>
+          <view class="record-result" style="color: {{theme.primary}};">选择了：{{item.result}}</view>
+        </view>
+      </view>
+      <view class="record-time">{{item.timeText}}</view>
+    </view>
+  </block>
+
+  <view class="card stats-card">
+    <view class="stats-title">选择统计</view>
+    <view class="stats-row">
+      <view class="stats-cell">
+        <view class="stats-value" style="color: {{theme.primary}};">{{stats.today}}</view>
+        <view class="muted">今日</view>
+      </view>
+      <view class="stats-cell">
+        <view class="stats-value" style="color: {{theme.primary}};">{{stats.thisWeek}}</view>
+        <view class="muted">本周</view>
+      </view>
+      <view class="stats-cell">
+        <view class="stats-value" style="color: {{theme.primary}};">{{stats.total}}</view>
+        <view class="muted">累计</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card tip-card">
+    <view class="stats-title">使用小贴士</view>
+    <view class="tip-line">• 输入你纠结的问题</view>
+    <view class="tip-line">• 添加备选项（至少 2 个）</view>
+    <view class="tip-line">• 点击“帮我选”获得结果</view>
+    <view class="tip-line">• 所有选择会自动保存到历史</view>
+  </view>
+</view>

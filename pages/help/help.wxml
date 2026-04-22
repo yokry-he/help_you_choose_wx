@@ -1,0 +1,40 @@
+<page-bg />
+
+<view class="container help-page">
+  <view class="hero" style="background: linear-gradient(135deg, {{theme.primaryLight}}, {{theme.primary}});">
+    <view class="hero-bubbles">
+      <view class="hero-noise"></view>
+      <view class="bubble b1"></view>
+      <view class="bubble b2"></view>
+      <view class="bubble b3"></view>
+      <view class="bubble b4"></view>
+      <view class="star s1">✦</view>
+      <view class="star s2">✦</view>
+    </view>
+    <view class="hero-title">🎲 纠结救急指南</view>
+    <view class="hero-sub">读完这篇，离「随便吧」又近一步</view>
+    <view class="hero-tags">
+      <view class="hero-tag">随缘</view>
+      <view class="hero-tag">别想了</view>
+      <view class="hero-tag">交给天意</view>
+      <view class="hero-tag">先吃饭</view>
+    </view>
+  </view>
+
+  <block wx:for="{{faqList}}" wx:key="id">
+    <view class="card faq-card">
+      <view class="faq-head" data-id="{{item.id}}" bindtap="toggleFaq">
+        <view class="faq-title">{{item.icon}} {{item.q}}</view>
+        <view class="faq-arrow" style="color: {{theme.primary}};">{{item.open ? "⌃" : "⌄"}}</view>
+      </view>
+      <view class="faq-body" wx:if="{{item.open}}">{{item.a}}</view>
+    </view>
+  </block>
+
+  <view class="card cold-card">
+    <view class="cold-title">💡 纠结星人冷知识</view>
+    <view class="cold-line">🐾 纠结不是病，但一直纠结会饿。</view>
+    <view class="cold-line">📱 本页没有「摇一摇」彩蛋——别摇了，手机会晕。</view>
+    <view class="cold-line">☕ 实在选不动时，默认答案通常是：先喝口水。</view>
+  </view>
+</view>

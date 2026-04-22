@@ -1,0 +1,143 @@
+.settings-page {
+  padding-top: 8rpx;
+}
+
+.setting-card {
+  margin-bottom: 16rpx;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.setting-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 4rpx;
+}
+
+.setting-desc {
+  color: #9fa7b6;
+  font-size: 24rpx;
+}
+
+.device-tag {
+  margin-top: 12rpx;
+  display: inline-block;
+  border-radius: 999rpx;
+  padding: 6rpx 16rpx;
+  font-size: 24rpx;
+}
+
+.low-end {
+  color: #b2542d;
+  background: #fff0e9;
+}
+
+.high-end {
+  color: #2d7b45;
+  background: #e9f9ee;
+}
+
+.backup-actions {
+  margin-top: 14rpx;
+  display: flex;
+  gap: 12rpx;
+}
+
+.backup-actions button {
+  flex: 1;
+}
+
+.backup-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(12, 16, 28, 0.56);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backup-panel {
+  width: 680rpx;
+  max-height: 84vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.backup-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.mode-row {
+  margin-top: 14rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  align-items: center;
+}
+
+.mode-pill {
+  border-radius: 999rpx;
+  border: 2rpx solid #ff8c69;
+  color: #ff8c69;
+  padding: 8rpx 18rpx;
+  font-size: 24rpx;
+  background: #ffffff;
+}
+
+.mode-pill-active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.mini-btn {
+  min-height: 58rpx;
+  line-height: 56rpx;
+  padding: 0 18rpx;
+  font-size: 24rpx;
+}
+
+.backup-input {
+  margin-top: 12rpx;
+  width: 100%;
+  min-height: 260rpx;
+  background: #f8f9fc;
+  border-radius: 14rpx;
+  padding: 16rpx;
+  box-sizing: border-box;
+}
+
+.preview-error {
+  margin-top: 10rpx;
+  color: #d14343;
+  font-size: 24rpx;
+}
+
+.preview-box {
+  margin-top: 12rpx;
+  background: #f8f9fc;
+  border-radius: 14rpx;
+  padding: 14rpx;
+}
+
+.preview-title {
+  font-size: 26rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.preview-line {
+  font-size: 24rpx;
+  color: #475467;
+  line-height: 1.6;
+}

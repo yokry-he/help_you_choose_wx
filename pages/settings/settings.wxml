@@ -1,0 +1,85 @@
+<page-bg />
+
+<view class="container settings-page">
+  <view class="card setting-card">
+    <view class="setting-row">
+      <view>
+        <view class="setting-title">动画效果</view>
+        <view class="setting-desc">关闭后抽选将直接出结果</view>
+      </view>
+      <switch checked="{{settings.animationsEnabled}}" bindchange="onToggleAnimation" color="{{theme.primary}}" />
+    </view>
+  </view>
+
+  <view class="card setting-card">
+    <view class="setting-row">
+      <view>
+        <view class="setting-title">低性能机自动降级</view>
+        <view class="setting-desc">检测为低性能设备时自动关闭转盘和彩带</view>
+      </view>
+      <switch checked="{{settings.autoReduceOnLowEnd}}" bindchange="onToggleAutoReduce" color="{{theme.primary}}" />
+    </view>
+    <view class="device-tag {{settings.lowEndDevice ? 'low-end' : 'high-end'}}">
+      设备判断：{{settings.lowEndDevice ? "低性能（已降级）" : "常规性能"}}
+    </view>
+  </view>
+
+  <view class="card setting-card">
+    <view class="setting-title">数据备份恢复</view>
+    <view class="setting-desc">导出会复制 JSON 到剪贴板；恢复支持覆盖或合并模式</view>
+    <view class="backup-actions">
+      <button class="ghost-btn" bindtap="exportBackup" style="color: {{theme.primary}}; border-color: {{theme.primary}};">导出备份</button>
+      <button class="primary-btn" bindtap="openImportDialog" style="background: {{theme.primary}};">恢复备份</button>
+    </view>
+  </view>
+</view>
+
+<view class="backup-mask" wx:if="{{backupDialogVisible}}">
+  <view class="backup-panel">
+    <view class="backup-title">恢复备份 JSON</view>
+    <view class="muted">支持两种模式：覆盖（替换原数据）/ 合并（按 id 合并）</view>
+
+    <view class="mode-row">
+      <view
+        class="mode-pill {{backupMode === 'replace' ? 'mode-pill-active' : ''}}"
+        data-mode="replace"
+        bindtap="chooseBackupMode"
+        style="{{backupMode === 'replace' ? 'background:' + theme.primary + '; border-color:' + theme.primary + ';' : 'color:' + theme.primary + '; border-color:' + theme.primary + ';'}}"
+      >
+        覆盖
+      </view>
+      <view
+        class="mode-pill {{backupMode === 'merge' ? 'mode-pill-active' : ''}}"
+        data-mode="merge"
+        bindtap="chooseBackupMode"
+        style="{{backupMode === 'merge' ? 'background:' + theme.primary + '; border-color:' + theme.primary + ';' : 'color:' + theme.primary + '; border-color:' + theme.primary + ';'}}"
+      >
+        合并
+      </view>
+      <button class="ghost-btn mini-btn" bindtap="useClipboardContent" style="color: {{theme.primary}}; border-color: {{theme.primary}};">粘贴剪贴板</button>
+    </view>
+
+    <textarea
+      class="backup-input"
+      placeholder="请粘贴完整 JSON 备份内容"
+      value="{{backupJsonInput}}"
+      maxlength="-1"
+      auto-height
+      bindinput="onBackupInput"
+    />
+
+    <view class="preview-error" wx:if="{{backupError}}">{{backupError}}</view>
+    <view class="preview-box" wx:if="{{backupPreview}}">
+      <view class="preview-title">恢复预览</view>
+      <view class="preview-line">历史记录：{{backupPreview.current.history}} -> {{backupPreview.result.history}}（导入 {{backupPreview.incoming.history}}）</view>
+      <view class="preview-line">自定义模板：{{backupPreview.current.customTemplates}} -> {{backupPreview.result.customTemplates}}（导入 {{backupPreview.incoming.customTemplates}}）</view>
+      <view class="preview-line">动画开关：{{backupPreview.settings.animationsEnabled ? "开" : "关"}}，主题索引：{{backupPreview.settings.themeIndex}}</view>
+      <view class="muted">模式：{{backupPreview.mode === "merge" ? "合并（按 id）" : "覆盖（替换本地）"}}</view>
+    </view>
+
+    <view class="backup-actions">
+      <button class="ghost-btn" bindtap="closeImportDialog" style="color: {{theme.primary}}; border-color: {{theme.primary}};">取消</button>
+      <button class="primary-btn" bindtap="confirmImport" style="background: {{theme.primary}};" disabled="{{!backupPreview}}">开始恢复</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# WeChat DevTools local/private config
+project.private.config.json
+project.project.json
+
+# Build/debug artifacts
+sourcemap.zip
+*.map
+*.log
+
+# Node dependency directories (if introduced later)
+node_modules/
+miniprogram_npm/
+
+# Temporary files
+*.tmp
+*.temp

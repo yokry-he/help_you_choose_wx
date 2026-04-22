@@ -1,0 +1,70 @@
+<page-bg />
+
+<view class="confetti-wrap" wx:if="{{showConfetti}}">
+  <canvas class="confetti-canvas" canvas-id="confettiCanvas" width="750" height="420" />
+</view>
+
+<wheel-overlay id="wheelOverlay" bindcomplete="onWheelComplete" />
+
+<view class="container" wx:if="{{hasResult}}">
+  <view class="question-row">
+    <view class="question-icon-wrap" style="background: {{selectedBg}}; color: {{theme.primary}};">✦</view>
+    <view class="card question-card">
+      <view class="muted">你的问题</view>
+      <view class="question">{{result.question}}</view>
+    </view>
+  </view>
+
+  <view class="card result-card {{animate ? 'pulse' : ''}}">
+    <view class="result-title">我帮你选了</view>
+    <view class="result-badge" style="color: {{theme.primary}};">{{result.result}}</view>
+    <view class="result-hint" style="color: {{theme.primary}};">{{resultHint}}</view>
+  </view>
+
+  <view class="card options-card">
+    <view class="field-title">所有选项</view>
+    <view
+      class="opt-item"
+      wx:for="{{result.options}}"
+      wx:key="*this"
+    >
+      <view class="opt-left">
+        <view
+          class="opt-dot {{item === result.result ? 'opt-dot-selected' : ''}}"
+          style="{{item === result.result ? 'border-color:' + theme.primary + '; background:' + theme.primary + ';' : ''}}"
+        ></view>
+        <view class="opt-text" style="{{item === result.result ? 'color:' + theme.primary + '; font-weight:700;' : ''}}">{{item}}</view>
+      </view>
+      <view
+        wx:if="{{item === result.result}}"
+        class="selected-tag"
+        style="background: {{theme.primary}};"
+      >
+        已选择
+      </view>
+    </view>
+  </view>
+
+  <view class="btn-group" wx:if="{{!fromShare}}">
+    <button class="primary-btn action-btn action-primary" bindtap="again" style="background: {{theme.primary}};">↻ 再来一次</button>
+    <button class="ghost-btn action-btn action-ghost" bindtap="edit" style="color: {{theme.primary}}; border-color: {{theme.primary}};">✎ 修改选项</button>
+    <button class="ghost-btn action-btn action-share" open-type="share" style="color: {{theme.primary}}; border-color: {{theme.primary}};">↗ 分享结果</button>
+    <view class="half-actions">
+      <button class="ghost-btn action-btn half-btn" bindtap="goHome" style="color: {{theme.primary}}; border-color: {{theme.primary}};">⌂ 返回首页</button>
+      <button class="ghost-btn action-btn half-btn history-btn" bindtap="goHistory">◴ 历史记录</button>
+    </view>
+  </view>
+  <view class="btn-group" wx:else>
+    <view class="half-actions">
+      <button class="primary-btn action-btn half-btn action-primary" bindtap="startWithSharedDraft" style="background: {{theme.primary}};">✦ 我也来</button>
+      <button class="ghost-btn action-btn half-btn action-ghost" bindtap="goHome" style="color: {{theme.primary}}; border-color: {{theme.primary}};">⌂ 去首页</button>
+    </view>
+  </view>
+</view>
+
+<view class="container" wx:else>
+  <view class="card">
+    <view>暂无结果，请先去决策页抽选。</view>
+    <button class="primary-btn" bindtap="goDecision" style="background: {{theme.primary}};">去决策</button>
+  </view>
+</view>

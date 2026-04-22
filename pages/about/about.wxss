@@ -1,0 +1,62 @@
+.about-page {
+  padding-top: 8rpx;
+}
+
+.app-logo {
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 24rpx;
+  margin: 12rpx auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 72rpx;
+}
+
+.app-name {
+  margin-top: 16rpx;
+  text-align: center;
+  font-size: 46rpx;
+  font-weight: 800;
+  color: #1f2430;
+}
+
+.app-version {
+  margin-top: 6rpx;
+  text-align: center;
+  color: #c2c9d6;
+  font-size: 30rpx;
+}
+
+.section-card {
+  margin-top: 18rpx;
+  border-radius: 24rpx;
+}
+
+.section-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1f2430;
+  margin-bottom: 10rpx;
+}
+
+.section-text {
+  font-size: 30rpx;
+  line-height: 1.6;
+  color: #4a5568;
+  margin-top: 8rpx;
+}
+
+.feature-line {
+  font-size: 30rpx;
+  line-height: 1.7;
+  color: #4a5568;
+}
+
+.copyright {
+  margin: 24rpx 0 10rpx;
+  text-align: center;
+  color: #c2c9d6;
+  font-size: 24rpx;
+}

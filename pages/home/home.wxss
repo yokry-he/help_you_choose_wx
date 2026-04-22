@@ -1,0 +1,272 @@
+.container {
+  padding: 0 0 24rpx;
+}
+
+.hero {
+  padding: 72rpx 28rpx 72rpx;
+  color: #ffffff;
+  border-bottom-left-radius: 26rpx;
+  border-bottom-right-radius: 26rpx;
+  margin-bottom: 18rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 14rpx 14rpx;
+  opacity: 0.35;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.b1 {
+  width: 240rpx;
+  height: 240rpx;
+  right: -36rpx;
+  top: -26rpx;
+}
+
+.b2 {
+  width: 120rpx;
+  height: 120rpx;
+  left: 30rpx;
+  top: 24rpx;
+}
+
+.b3 {
+  width: 180rpx;
+  height: 180rpx;
+  right: 180rpx;
+  top: 58rpx;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.b4 {
+  width: 90rpx;
+  height: 90rpx;
+  right: 52rpx;
+  bottom: 20rpx;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.star {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 24rpx;
+}
+
+.s1 {
+  right: 116rpx;
+  top: 26rpx;
+}
+
+.s2 {
+  right: 44rpx;
+  top: 116rpx;
+}
+
+.s3 {
+  left: 20rpx;
+  bottom: 24rpx;
+}
+
+.face-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -26rpx;
+  transform: translateX(-50%);
+  font-size: 140rpx;
+  letter-spacing: 24rpx;
+  color: rgba(255, 255, 255, 0.12);
+  font-weight: 700;
+}
+
+.hero-title {
+  font-size: 48rpx;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-subtitle {
+  margin-top: 10rpx;
+  font-size: 30rpx;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-action {
+  margin: 0 24rpx 18rpx;
+  padding: 22rpx;
+  border-radius: 24rpx;
+}
+
+.hero-action-title {
+  font-size: 42rpx;
+  font-weight: 800;
+  color: #1f2430;
+}
+
+.hero-action-subtitle {
+  margin-top: 8rpx;
+  font-size: 28rpx;
+  line-height: 1.45;
+}
+
+.hero-start-btn {
+  margin-top: 14rpx;
+  min-height: 78rpx;
+  line-height: 78rpx;
+  font-size: 34rpx;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24rpx;
+  margin-top: 26rpx;
+  margin-bottom: 12rpx;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: 500;
+  color: #1f2430;
+}
+
+.section-link {
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.template-grid {
+  padding: 14rpx 24rpx 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12rpx;
+}
+
+.template-item {
+  padding: 18rpx 10rpx;
+  text-align: center;
+  border-radius: 22rpx;
+  min-height: 132rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.template-icon {
+  font-size: 46rpx;
+}
+
+.template-title {
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  line-height: 1.3;
+}
+
+.empty-record {
+  margin: 14rpx 24rpx 0;
+  text-align: center;
+}
+
+.record-item {
+  margin: 14rpx 24rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14rpx 16rpx;
+}
+
+.record-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.record-icon {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12rpx;
+  font-size: 30rpx;
+}
+
+.record-main {
+  min-width: 0;
+}
+
+.record-question {
+  font-size: 30rpx;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.record-result {
+  margin-top: 4rpx;
+  font-size: 26rpx;
+}
+
+.record-time {
+  color: #a2a8b5;
+  font-size: 24rpx;
+  margin-left: 10rpx;
+}
+
+.stats-card,
+.tip-card {
+  margin: 22rpx 24rpx 0;
+}
+
+.stats-title {
+  margin-bottom: 12rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.stats-row {
+  margin-top: 12rpx;
+  display: flex;
+}
+
+.stats-cell {
+  flex: 1;
+  text-align: center;
+}
+
+.stats-value {
+  font-size: 54rpx;
+  font-weight: 800;
+}
+
+.tip-line {
+  font-size: 28rpx;
+  color: #667085;
+  line-height: 1.65;
+}

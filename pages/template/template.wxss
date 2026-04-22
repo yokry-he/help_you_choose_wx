@@ -1,0 +1,259 @@
+.container {
+  padding-top: 8rpx;
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #f6f7fb;
+  padding-bottom: 10rpx;
+}
+
+.page-title {
+  padding: 0;
+  font-size: 42rpx;
+  font-weight: 700;
+  color: #1f2430;
+}
+
+.category-row {
+  margin-top: 18rpx;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.category-inner {
+  display: inline-flex;
+  gap: 12rpx;
+}
+
+.category-chip {
+  border-radius: 999rpx;
+  border: 2rpx solid #e8eaf1;
+  padding: 12rpx 24rpx;
+  background: #ffffff;
+  font-size: 24rpx;
+  color: #5f6676;
+}
+
+.category-chip-active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.content-wrap {
+  margin-top: 4rpx;
+}
+
+.mini-btn {
+  min-height: 56rpx;
+  line-height: 54rpx;
+  padding: 0 16rpx;
+  font-size: 22rpx;
+}
+
+.tpl-grid {
+  margin-top: 14rpx;
+  padding: 0 0 8rpx;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12rpx;
+}
+
+.tpl-card {
+  border-radius: 22rpx;
+  padding: 16rpx 16rpx 14rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-head {
+  display: flex;
+  gap: 12rpx;
+  align-items: center;
+}
+
+.icon-wrap {
+  width: 58rpx;
+  height: 58rpx;
+  border-radius: 14rpx;
+  background: #f7f8fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 34rpx;
+}
+
+.tpl-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #1f2430;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.head-actions {
+  display: flex;
+  gap: 8rpx;
+  align-items: center;
+}
+
+.head-action-btn {
+  padding: 0 10rpx;
+  min-height: 42rpx;
+  line-height: 40rpx;
+  font-size: 18rpx;
+  border-radius: 999rpx;
+  border: 2rpx solid #58d8d5;
+  color: #58d8d5;
+  background: #ffffff;
+}
+
+.tpl-question {
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  line-height: 1.4;
+  height: calc(22rpx * 1.4 * 3);
+  color: #7b8496;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+.meta-row {
+  margin-top: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.meta-item {
+  font-size: 24rpx;
+  color: #a0a7b6;
+}
+
+.use-btn {
+  width: 100%;
+  margin-top: 12rpx;
+  min-height: 42rpx;
+  line-height: 42rpx;
+  font-size: 24rpx;
+  border-radius: 16rpx;
+}
+
+.tool-row {
+  margin-top: 10rpx;
+  display: flex;
+  justify-content: space-between;
+  gap: 10rpx;
+}
+
+.tool-row .mini-btn {
+  font-size: 10rpx;
+}
+
+.empty-box {
+  padding: 72rpx 24rpx 0;
+  text-align: center;
+}
+
+.editor-mask {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(12, 16, 28, 0.56);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editor-panel {
+  width: 700rpx;
+  max-width: calc(100vw - 28rpx);
+  max-height: 78vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 22rpx;
+  padding: 20rpx 22rpx 22rpx;
+  box-sizing: border-box;
+}
+
+.editor-title {
+  font-size: 38rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+
+.editor-input,
+.editor-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #f8f9fc;
+  border-radius: 14rpx;
+  padding: 14rpx 16rpx;
+  margin-bottom: 10rpx;
+  font-size: 28rpx;
+  color: #1f2430;
+}
+
+.editor-textarea {
+  min-height: 150rpx;
+}
+
+.editor-options-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10rpx 0 8rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.option-edit-row {
+  display: flex;
+  gap: 10rpx;
+  align-items: flex-start;
+}
+
+.option-field {
+  margin-bottom: 10rpx;
+  flex: 1;
+}
+
+.editor-add-btn {
+  min-height: 54rpx;
+  line-height: 52rpx;
+  padding: 0 18rpx;
+}
+
+.option-remove-btn {
+  width: 56rpx;
+  min-width: 56rpx;
+  min-height: 56rpx;
+  line-height: 54rpx;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.editor-actions {
+  margin-top: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.editor-actions button {
+  flex: 1;
+  min-height: 74rpx;
+  line-height: 72rpx;
+  border-radius: 999rpx;
+  font-size: 34rpx;
+}

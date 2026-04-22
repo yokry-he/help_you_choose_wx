@@ -1,0 +1,8 @@
+<view class="wheel-mask" wx:if="{{visible}}">
+  <view class="wheel-wrap">
+    <canvas class="wheel-canvas" canvas-id="wheelCanvas" width="310" height="310" />
+    <view class="wheel-needle" style="border-top-color: {{theme.primary}};"></view>
+    <view class="wheel-center" style="border-color: {{theme.primaryLight}}; color: {{theme.primary}};">✦</view>
+  </view>
+  <view class="wheel-sub">{{rollingText}}</view>
+</view>
