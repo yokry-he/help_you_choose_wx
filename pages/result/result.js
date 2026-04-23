@@ -156,6 +156,7 @@ Page({
       primaryDark: "#FF6B3D",
     },
     selectedBg: "rgba(255,140,105,0.14)",
+    resultBadgeBg: "rgba(255,140,105,0.12)",
   },
   onLoad(query) {
     this._sharedResult = parseSharedResult(query);
@@ -164,6 +165,7 @@ Page({
       applyPageTheme(this, theme, {
         alphaFields: {
           selectedBg: 0.14,
+          resultBadgeBg: 0.12,
         },
       });
     });
@@ -397,6 +399,7 @@ Page({
     applyPageTheme(this, theme, {
       alphaFields: {
         selectedBg: 0.14,
+        resultBadgeBg: 0.12,
       },
       extraData: {
         result: data || null,

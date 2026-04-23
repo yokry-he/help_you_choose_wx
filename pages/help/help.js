@@ -12,7 +12,7 @@ Page({
       {
         id: "how",
         icon: "🚀",
-        q: "怎么用 Help You Choose？",
+        q: "怎么用 “帮你定了”？",
         a: "超简单：首页点「开始选择」→ 写下你在纠结啥 → 塞进去两个以上选项 → 点「帮我选」。接下来发生的事，就交给概率和一点点仪式感啦。",
         open: true,
       },
@@ -66,7 +66,9 @@ Page({
   },
   toggleFaq(e) {
     const id = e.currentTarget.dataset.id;
-    const list = this.data.faqList.map((it) => (it.id === id ? { ...it, open: !it.open } : it));
+    const list = this.data.faqList.map((it) =>
+      it.id === id ? { ...it, open: !it.open } : it,
+    );
     this.setData({ faqList: list });
   },
 });

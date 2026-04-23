@@ -14,7 +14,7 @@ const BACKGROUND_IMAGES = [
 
 Component({
   data: {
-    bgStyle: "",
+    bgUrl: "",
   },
   lifetimes: {
     attached() {
@@ -22,7 +22,7 @@ Component({
       const idx = Math.floor(Math.random() * list.length);
       const url = list[idx];
       this.setData({
-        bgStyle: `background-image: url('${url}');`,
+        bgUrl: url,
       });
     },
   },

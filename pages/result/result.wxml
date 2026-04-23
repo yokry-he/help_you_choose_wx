@@ -17,7 +17,7 @@
 
   <view class="card result-card {{animate ? 'pulse' : ''}}">
     <view class="result-title">我帮你选了</view>
-    <view class="result-badge" style="color: {{theme.primary}};">{{result.result}}</view>
+    <view class="result-badge" style="color: {{theme.primary}}; background: {{resultBadgeBg}};">{{result.result}}</view>
     <view class="result-hint" style="color: {{theme.primary}};">{{resultHint}}</view>
   </view>
 

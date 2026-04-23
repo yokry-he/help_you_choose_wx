@@ -50,17 +50,6 @@
   overflow: hidden;
 }
 
-.result-card::before {
-  content: "☺";
-  position: absolute;
-  left: 50%;
-  top: 56%;
-  transform: translate(-50%, -50%);
-  font-size: 280rpx;
-  color: rgba(158, 120, 214, 0.08);
-  font-weight: 700;
-}
-
 .result-title {
   text-align: center;
   font-size: 46rpx;

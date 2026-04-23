@@ -1,1 +1,7 @@
-<view class="page-bg-image" style="{{bgStyle}}"></view>
+<image
+  class="page-bg-image"
+  src="{{bgUrl}}"
+  mode="aspectFit"
+  lazy-load
+  show-menu-by-longpress="{{false}}"
+/>
