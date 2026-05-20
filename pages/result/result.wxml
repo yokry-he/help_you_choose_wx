@@ -19,6 +19,21 @@
     <view class="result-title">我帮你选了</view>
     <view class="result-badge" style="color: {{theme.primary}}; background: {{resultBadgeBg}};">{{result.result}}</view>
     <view class="result-hint" style="color: {{theme.primary}};">{{resultHint}}</view>
+    <view class="tone-row" wx:if="{{!fromShare}}">
+      <view class="tone-label muted">语气：{{tonePackLabel}}</view>
+      <scroll-view class="tone-scroll" scroll-x enable-flex>
+        <view
+          class="tone-pill {{tonePack === item.key ? 'tone-pill-active' : ''}}"
+          wx:for="{{tonePackOptions}}"
+          wx:key="key"
+          data-key="{{item.key}}"
+          bindtap="onTonePackChange"
+          style="{{tonePack === item.key ? 'background:' + theme.primary + '; border-color:' + theme.primary + ';' : 'color:' + theme.primary + '; border-color:' + theme.primary + ';'}}"
+        >
+          {{item.label}}
+        </view>
+      </scroll-view>
+    </view>
   </view>
 
   <view class="card options-card">

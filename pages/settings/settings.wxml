@@ -14,6 +14,53 @@
   <view class="card setting-card">
     <view class="setting-row">
       <view>
+        <view class="setting-title">摇一摇抽选</view>
+        <view class="setting-desc">在决策页晃动手机可触发抽选</view>
+      </view>
+      <switch checked="{{settings.shakeEnabled}}" bindchange="onToggleShake" color="{{theme.primary}}" />
+    </view>
+  </view>
+
+  <view class="card setting-card">
+    <view class="setting-row">
+      <view>
+        <view class="setting-title">触感反馈</view>
+        <view class="setting-desc">开奖与蓄力时的短振动</view>
+      </view>
+      <switch checked="{{settings.hapticEnabled}}" bindchange="onToggleHaptic" color="{{theme.primary}}" />
+    </view>
+  </view>
+
+  <view class="card setting-card">
+    <view class="setting-row">
+      <view>
+        <view class="setting-title">音效反馈</view>
+        <view class="setting-desc">蓄力滴答与开奖提示音</view>
+      </view>
+      <switch checked="{{settings.soundEnabled}}" bindchange="onToggleSound" color="{{theme.primary}}" />
+    </view>
+  </view>
+
+  <view class="card setting-card">
+    <view class="setting-title">结果语气包</view>
+    <view class="setting-desc">影响结果页趣味文案的风格</view>
+    <view class="tone-pack-row">
+      <view
+        class="tone-pack-pill {{settings.tonePack === item.key ? 'tone-pack-pill-active' : ''}}"
+        wx:for="{{tonePackOptions}}"
+        wx:key="key"
+        data-key="{{item.key}}"
+        bindtap="onSelectTonePack"
+        style="{{settings.tonePack === item.key ? 'background:' + theme.primary + '; border-color:' + theme.primary + ';' : 'color:' + theme.primary + '; border-color:' + theme.primary + ';'}}"
+      >
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+  <view class="card setting-card">
+    <view class="setting-row">
+      <view>
         <view class="setting-title">低性能机自动降级</view>
         <view class="setting-desc">检测为低性能设备时自动关闭转盘和彩带</view>
       </view>

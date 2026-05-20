@@ -14,6 +14,24 @@
     <view class="hero-icon">🏆</view>
     <view class="hero-title">纠结星人</view>
     <view class="hero-sub">帮你做出更好的选择</view>
+    <view class="hero-streak" wx:if="{{engagement.currentStreak > 0}}">
+      已连续 {{engagement.currentStreak}} 天 · 成就 {{engagement.earnedCount}}/{{engagement.totalBadges}}
+    </view>
+  </view>
+
+  <view class="card badge-card" wx:if="{{engagement.badges.length}}">
+    <view class="badge-title">轻成就</view>
+    <view class="badge-grid">
+      <view
+        class="badge-item {{item.earned ? 'badge-earned' : 'badge-locked'}}"
+        wx:for="{{engagement.badges}}"
+        wx:key="id"
+      >
+        <view class="badge-icon">{{item.icon}}</view>
+        <view class="badge-name">{{item.name}}</view>
+        <view class="badge-desc muted">{{item.desc}}</view>
+      </view>
+    </view>
   </view>
 
   <block wx:for="{{menuItems}}" wx:key="key">

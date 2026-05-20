@@ -56,6 +56,21 @@
     </view>
   </block>
 
+  <view class="card stats-card" wx:if="{{engagement.currentStreak > 0 || engagement.earnedCount > 0}}">
+    <view class="stats-title">连续使用</view>
+    <view class="streak-row">
+      <view class="streak-chip" style="background: {{quickBg}}; color: {{theme.primary}};">
+        🔥 连续 {{engagement.currentStreak}} 天
+      </view>
+      <view class="streak-chip" style="background: {{quickBg}}; color: {{theme.primary}};">
+        🏅 成就 {{engagement.earnedCount}}/{{engagement.totalBadges}}
+      </view>
+    </view>
+    <view class="muted streak-tip" wx:if="{{engagement.longestStreak > engagement.currentStreak}}">
+      历史最长连续 {{engagement.longestStreak}} 天
+    </view>
+  </view>
+
   <view class="card stats-card">
     <view class="stats-title">选择统计</view>
     <view class="stats-row">
@@ -78,7 +93,7 @@
     <view class="stats-title">使用小贴士</view>
     <view class="tip-line">• 输入你纠结的问题</view>
     <view class="tip-line">• 添加备选项（至少 2 个）</view>
-    <view class="tip-line">• 点击“帮我选”获得结果</view>
+    <view class="tip-line">• 点击、长按蓄力或摇一摇都可开奖</view>
     <view class="tip-line">• 所有选择会自动保存到历史</view>
   </view>
 </view>

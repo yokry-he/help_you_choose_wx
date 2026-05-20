@@ -23,6 +23,12 @@ Page({
       thisWeek: 0,
       total: 0,
     },
+    engagement: {
+      currentStreak: 0,
+      longestStreak: 0,
+      earnedCount: 0,
+      totalBadges: 0,
+    },
   },
   onLoad() {
     bindThemeListener(this, (theme) => {
@@ -57,6 +63,7 @@ Page({
         greetingText: `${prefix}，纠结星人`,
         recentList,
         stats: storage.getStats(),
+        engagement: storage.getEngagementSummary(),
       },
       callback: () => {
         this.syncTabSelected();

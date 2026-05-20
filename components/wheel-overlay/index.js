@@ -1,5 +1,6 @@
 const storage = require("../../utils/storage");
 const { hexToRgba } = require("../../utils/ui");
+const feedback = require("../../utils/feedback");
 
 Component({
   data: {
@@ -14,6 +15,7 @@ Component({
   lifetimes: {
     detached() {
       this.clearTimer();
+      this.clearChargeTimer();
     },
   },
   methods: {
@@ -21,6 +23,12 @@ Component({
       if (this._timer) {
         clearInterval(this._timer);
         this._timer = null;
+      }
+    },
+    clearChargeTimer() {
+      if (this._chargeTimer) {
+        clearInterval(this._chargeTimer);
+        this._chargeTimer = null;
       }
     },
     normalizeAngle(rad) {
@@ -130,15 +138,65 @@ Component({
       ctx.fillText(centerIcon, center - ctx.measureText(centerIcon).width / 2, center + 5);
       ctx.draw();
     },
-    startSpin({ options, pickIndex, theme }) {
-      if (!options || options.length < 2) return;
+    startChargeSpin({ options, pickIndex, theme }) {
+      if (!options || options.length < 2) return false;
+      const appliedTheme = theme || storage.getCurrentTheme();
+      this._chargeOptions = options;
+      this._chargePickIndex = pickIndex;
+      this._chargeRotation = 0;
+      this._chargeTickAt = 0;
+      this.setData({
+        visible: true,
+        rollingText: "蓄力中…松手开奖",
+        theme: appliedTheme,
+      });
+      this.drawWheel(options, 0);
+      this.clearChargeTimer();
+      this._chargeTimer = setInterval(() => {
+        this._chargeRotation += 0.42;
+        this.drawWheel(options, this._chargeRotation);
+        const now = Date.now();
+        if (now - this._chargeTickAt > 280) {
+          this._chargeTickAt = now;
+          feedback.playChargeTickSound();
+        }
+      }, 16);
+      return true;
+    },
+    releaseChargeSpin() {
+      if (!this._chargeTimer) return false;
+      const options = this._chargeOptions || [];
+      const pickIndex = this._chargePickIndex || 0;
+      const startRotation = this._chargeRotation || 0;
+      this.clearChargeTimer();
+      this._chargeOptions = null;
+      this._chargePickIndex = null;
+      if (!options.length) return false;
+      this.runSpinToTarget({
+        options,
+        pickIndex,
+        theme: this.data.theme,
+        startRotation,
+      });
+      return true;
+    },
+    cancelChargeSpin() {
+      this.clearChargeTimer();
+      this._chargeOptions = null;
+      this._chargePickIndex = null;
+      this.setData({
+        visible: false,
+        rollingText: "正在抽选…",
+      });
+    },
+    runSpinToTarget({ options, pickIndex, theme, startRotation = 0 }) {
       const settings = storage.getSmartSettings();
       const appliedTheme = theme || storage.getCurrentTheme();
       const count = Math.max(2, options.length);
       const sweep = (Math.PI * 2) / count;
-      const duration = settings.lowEndDevice ? 1700 : 2500;
-      const baseTurns = settings.lowEndDevice ? 4 : 6;
-      const targetRotation = baseTurns * Math.PI * 2 - (pickIndex + 0.5) * sweep;
+      const duration = settings.lowEndDevice ? 1700 : 2300;
+      const baseTurns = settings.lowEndDevice ? 3 : 5;
+      const targetRotation = startRotation + baseTurns * Math.PI * 2 - (pickIndex + 0.5) * sweep;
       const startedAt = Date.now();
       let lastShownIndex = -1;
 
@@ -147,14 +205,13 @@ Component({
         rollingText: "正在抽选…",
         theme: appliedTheme,
       });
-      this.drawWheel(options, 0);
 
       this.clearTimer();
       this._timer = setInterval(() => {
         const elapsed = Date.now() - startedAt;
         const t = Math.min(1, elapsed / duration);
         const eased = 1 - Math.pow(1 - t, 5);
-        const rotation = targetRotation * eased;
+        const rotation = startRotation + (targetRotation - startRotation) * eased;
         const currentIndex = this.getPointerIndex(rotation, count);
         this.drawWheel(options, rotation);
 
@@ -168,6 +225,8 @@ Component({
           const finalIndex = this.getPointerIndex(targetRotation, count);
           const finalResult = options[finalIndex] || options[pickIndex];
           this.setData({ rollingText: `已选：${finalResult}` });
+          feedback.playHaptic("heavy");
+          feedback.playSpinEndSound();
           setTimeout(() => {
             this.setData({ visible: false, rollingText: "正在抽选…" });
             this.triggerEvent("complete", {
@@ -177,6 +236,15 @@ Component({
           }, 260);
         }
       }, 16);
+    },
+    startSpin({ options, pickIndex, theme }) {
+      if (!options || options.length < 2) return;
+      this.runSpinToTarget({
+        options,
+        pickIndex,
+        theme,
+        startRotation: 0,
+      });
     },
   },
 });

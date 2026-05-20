@@ -112,6 +112,61 @@
   z-index: 1;
 }
 
+.hero-streak {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  opacity: 0.92;
+  position: relative;
+  z-index: 1;
+}
+
+.badge-card {
+  margin: 0 24rpx 18rpx;
+}
+
+.badge-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 16rpx;
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12rpx;
+}
+
+.badge-item {
+  border-radius: 16rpx;
+  padding: 16rpx;
+  background: #f8f9fc;
+}
+
+.badge-earned {
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4rpx 14rpx rgba(30, 36, 52, 0.06);
+}
+
+.badge-locked {
+  opacity: 0.55;
+}
+
+.badge-icon {
+  font-size: 34rpx;
+  margin-bottom: 8rpx;
+}
+
+.badge-name {
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.badge-desc {
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  line-height: 1.4;
+}
+
 .menu-card {
   margin: 16rpx 24rpx 0;
   padding: 18rpx 20rpx;

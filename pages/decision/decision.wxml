@@ -48,14 +48,19 @@
     </view>
   </block>
 
+  <view class="interaction-hint muted">{{interactionHint}}</view>
+
   <button
-    class="primary-btn action-btn"
-    bindtap="makeChoice"
-    loading="{{isChoosing}}"
-    disabled="{{isChoosing}}"
+    class="primary-btn action-btn {{isCharging ? 'action-btn-charging' : ''}}"
+    bindtap="onChooseTap"
+    bindtouchstart="onChooseTouchStart"
+    bindtouchend="onChooseTouchEnd"
+    bindtouchcancel="onChooseTouchCancel"
+    loading="{{isChoosing && !isCharging}}"
+    disabled="{{isChoosing && !isCharging}}"
     style="background: {{theme.primary}};"
   >
-    {{isChoosing ? "正在抽选…" : "帮我选"}}
+    {{isCharging ? "蓄力中…松手开奖" : (isChoosing ? "正在抽选…" : "帮我选")}}
   </button>
 </view>
 

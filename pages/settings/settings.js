@@ -11,7 +11,12 @@ Page({
       animationsEnabled: true,
       autoReduceOnLowEnd: true,
       lowEndDevice: false,
+      shakeEnabled: true,
+      hapticEnabled: true,
+      soundEnabled: true,
+      tonePack: "auto",
     },
+    tonePackOptions: storage.TONE_PACK_OPTIONS,
     theme: {
       primary: "#9B59B6",
       primaryLight: "#BB8FD4",
@@ -34,29 +39,49 @@ Page({
     applyPageTheme(this, theme, {
       extraData: {
         settings,
+        tonePackOptions: storage.TONE_PACK_OPTIONS,
       },
     });
   },
   onUnload() {
     unbindThemeListener(this);
   },
-  onToggleAnimation(e) {
-    const enabled = !!e.detail.value;
+  persistSettings(patch) {
     const settings = {
       ...this.data.settings,
-      animationsEnabled: enabled,
+      ...patch,
     };
     this.setData({ settings });
     storage.saveSettings(settings);
   },
+  onToggleAnimation(e) {
+    this.persistSettings({
+      animationsEnabled: !!e.detail.value,
+    });
+  },
   onToggleAutoReduce(e) {
-    const enabled = !!e.detail.value;
-    const settings = {
-      ...this.data.settings,
-      autoReduceOnLowEnd: enabled,
-    };
-    this.setData({ settings });
-    storage.saveSettings(settings);
+    this.persistSettings({
+      autoReduceOnLowEnd: !!e.detail.value,
+    });
+  },
+  onToggleShake(e) {
+    this.persistSettings({
+      shakeEnabled: !!e.detail.value,
+    });
+  },
+  onToggleHaptic(e) {
+    this.persistSettings({
+      hapticEnabled: !!e.detail.value,
+    });
+  },
+  onToggleSound(e) {
+    this.persistSettings({
+      soundEnabled: !!e.detail.value,
+    });
+  },
+  onSelectTonePack(e) {
+    const tonePack = storage.normalizeTonePack(e.currentTarget.dataset.key);
+    this.persistSettings({ tonePack });
   },
   exportBackup() {
     const json = storage.exportBackupJson();

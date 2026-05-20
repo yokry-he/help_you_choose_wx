@@ -34,7 +34,7 @@
   <view class="card cold-card">
     <view class="cold-title">💡 纠结星人冷知识</view>
     <view class="cold-line">🐾 纠结不是病，但一直纠结会饿。</view>
-    <view class="cold-line">📱 本页没有「摇一摇」彩蛋——别摇了，手机会晕。</view>
+    <view class="cold-line">📱 决策页支持摇一摇开奖，可在「我的 → 互动与反馈」里关闭。</view>
     <view class="cold-line">☕ 实在选不动时，默认答案通常是：先喝口水。</view>
   </view>
 </view>

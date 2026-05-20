@@ -250,6 +250,24 @@
   font-weight: 500;
 }
 
+.streak-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.streak-chip {
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.streak-tip {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+}
+
 .stats-row {
   margin-top: 12rpx;
   display: flex;

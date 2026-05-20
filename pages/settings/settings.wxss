@@ -24,6 +24,25 @@
   font-size: 24rpx;
 }
 
+.tone-pack-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.tone-pack-pill {
+  padding: 10rpx 20rpx;
+  border-radius: 999rpx;
+  border: 1rpx solid;
+  font-size: 24rpx;
+  background: #ffffff;
+}
+
+.tone-pack-pill-active {
+  color: #ffffff;
+}
+
 .device-tag {
   margin-top: 12rpx;
   display: inline-block;

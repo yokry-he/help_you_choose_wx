@@ -1,4 +1,5 @@
 const storage = require("../../utils/storage");
+const feedback = require("../../utils/feedback");
 const {
   bindThemeListener,
   unbindThemeListener,
@@ -150,6 +151,9 @@ Page({
     animate: false,
     showConfetti: false,
     resultHint: "",
+    tonePack: "auto",
+    tonePackOptions: storage.TONE_PACK_OPTIONS,
+    tonePackLabel: "智能匹配",
     theme: {
       primary: "#FF8C69",
       primaryLight: "#FFB399",
@@ -197,7 +201,15 @@ Page({
     const hash = Math.abs(calcSeedHash(seed));
     return hash % 100 < 38;
   },
+  getTonePackLabel(key) {
+    const found = storage.TONE_PACK_OPTIONS.find((item) => item.key === key);
+    return (found && found.label) || "智能匹配";
+  },
   pickToneProfile(result) {
+    const forced = storage.getSmartSettings().tonePack || "auto";
+    if (forced !== "auto") {
+      return TONE_PROFILES.find((item) => item.key === forced) || TONE_PROFILES[0];
+    }
     const question = `${(result && result.question) || ""}`.trim();
     const option = `${(result && result.result) || ""}`.trim();
     return this.pickByHash(`${question}|${option}|tone`, TONE_PROFILES);
@@ -311,8 +323,9 @@ Page({
       result: finalResult,
       createdAt: Date.now(),
     };
-    storage.appendHistory(next);
+    const engagement = storage.appendHistory(next);
     getApp().globalData.lastResult = next;
+    getApp().globalData.lastEngagement = engagement;
     this.setData({
       result: next,
       animate: false,
@@ -392,10 +405,26 @@ Page({
       }
     }, frameInterval);
   },
+  onTonePackChange(e) {
+    const tonePack = storage.normalizeTonePack(e.currentTarget.dataset.key);
+    const settings = {
+      ...storage.getSmartSettings(),
+      tonePack,
+    };
+    storage.saveSettings(settings);
+    const data = this.data.result;
+    this.setData({
+      tonePack,
+      tonePackLabel: this.getTonePackLabel(tonePack),
+      resultHint: this.buildResultHint(data),
+    });
+    feedback.playHaptic("light");
+  },
   onShow() {
     const app = getApp();
     const data = this._sharedResult || app.globalData.lastResult;
     const theme = storage.getCurrentTheme();
+    const tonePack = storage.getSmartSettings().tonePack || "auto";
     applyPageTheme(this, theme, {
       alphaFields: {
         selectedBg: 0.14,
@@ -407,12 +436,19 @@ Page({
         fromShare: !!this._fromShare,
         animate: false,
         resultHint: this.buildResultHint(data),
+        tonePack,
+        tonePackLabel: this.getTonePackLabel(tonePack),
+        tonePackOptions: storage.TONE_PACK_OPTIONS,
       },
     });
     if (data) {
       setTimeout(() => this.setData({ animate: true }), 20);
       this.playConfetti();
+      if (!this._fromShare) {
+        feedback.playHaptic("medium");
+      }
     }
+    app.globalData.lastEngagement = null;
   },
   onShareAppMessage() {
     const result = this.data.result;

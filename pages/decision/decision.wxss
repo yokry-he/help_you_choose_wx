@@ -86,7 +86,19 @@
   background: transparent;
 }
 
+.interaction-hint {
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .action-btn {
   margin-top: 20rpx;
+}
+
+.action-btn-charging {
+  transform: scale(0.98);
+  opacity: 0.92;
 }
 

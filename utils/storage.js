@@ -1,7 +1,41 @@
 const HISTORY_KEY = "hyc_choice_history";
 const SETTINGS_KEY = "hyc_app_settings";
 const CUSTOM_TEMPLATE_KEY = "hyc_custom_templates";
+const ENGAGEMENT_KEY = "hyc_engagement";
 const { clampThemeIndex, getThemeByIndex } = require("./theme");
+
+const TONE_PACK_OPTIONS = [
+  { key: "auto", label: "智能匹配" },
+  { key: "cute", label: "可爱" },
+  { key: "teasing", label: "轻吐槽" },
+  { key: "healing", label: "治愈" },
+  { key: "serious", label: "决策官" },
+];
+
+const BADGE_DEFS = [
+  { id: "first_pick", name: "初来乍到", desc: "完成第 1 次抽选", icon: "🌱" },
+  { id: "streak_3", name: "三日不倒", desc: "连续 3 天使用", icon: "🔥" },
+  { id: "streak_7", name: "一周坚持", desc: "连续 7 天使用", icon: "⭐" },
+  { id: "total_10", name: "选择老手", desc: "累计抽选 10 次", icon: "🎯" },
+  { id: "total_50", name: "纠结终结者", desc: "累计抽选 50 次", icon: "🏆" },
+  { id: "week_5", name: "本周达人", desc: "本周抽选 5 次", icon: "⚡" },
+];
+
+function formatDateKey(timestamp) {
+  const d = new Date(timestamp);
+  const y = d.getFullYear();
+  const m = `${d.getMonth() + 1}`.padStart(2, "0");
+  const day = `${d.getDate()}`.padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+function shiftDateKey(dateKey, deltaDays) {
+  const parts = `${dateKey || ""}`.split("-").map(Number);
+  if (parts.length !== 3) return dateKey;
+  const d = new Date(parts[0], parts[1] - 1, parts[2]);
+  d.setDate(d.getDate() + deltaDays);
+  return formatDateKey(d.getTime());
+}
 
 function ensureDefaults() {
   const settings = wx.getStorageSync(SETTINGS_KEY);
@@ -12,6 +46,10 @@ function ensureDefaults() {
       lowEndDevice: false,
       lowEndChecked: false,
       themeIndex: 0,
+      shakeEnabled: true,
+      hapticEnabled: true,
+      soundEnabled: true,
+      tonePack: "auto",
     });
     return;
   }
@@ -21,6 +59,10 @@ function ensureDefaults() {
     lowEndDevice: !!settings.lowEndDevice,
     lowEndChecked: !!settings.lowEndChecked,
     themeIndex: clampThemeIndex(settings.themeIndex || 0),
+    shakeEnabled: settings.shakeEnabled !== false,
+    hapticEnabled: settings.hapticEnabled !== false,
+    soundEnabled: settings.soundEnabled !== false,
+    tonePack: normalizeTonePack(settings.tonePack),
   };
   wx.setStorageSync(SETTINGS_KEY, merged);
 }
@@ -63,6 +105,12 @@ function getSmartSettings() {
     return next;
   }
   return settings;
+}
+
+function normalizeTonePack(value) {
+  const key = `${value || "auto"}`;
+  const allowed = TONE_PACK_OPTIONS.map((item) => item.key);
+  return allowed.includes(key) ? key : "auto";
 }
 
 function shouldPlayAnimation() {
@@ -137,6 +185,33 @@ function bumpCustomTemplateUsage(id) {
   saveCustomTemplates(list);
 }
 
+function normalizeEngagement(input) {
+  if (!input || typeof input !== "object") {
+    return getEngagementRaw();
+  }
+  return {
+    lastActiveDate: `${input.lastActiveDate || ""}`,
+    currentStreak: Math.max(0, Number(input.currentStreak || 0)),
+    longestStreak: Math.max(0, Number(input.longestStreak || 0)),
+    earnedBadges: Array.isArray(input.earnedBadges)
+      ? input.earnedBadges.map((id) => `${id}`.trim()).filter(Boolean)
+      : [],
+  };
+}
+
+function mergeEngagement(current, incoming) {
+  const earned = new Set([
+    ...(current.earnedBadges || []),
+    ...(incoming.earnedBadges || []),
+  ]);
+  return {
+    lastActiveDate: incoming.lastActiveDate || current.lastActiveDate,
+    currentStreak: Math.max(current.currentStreak, incoming.currentStreak),
+    longestStreak: Math.max(current.longestStreak, incoming.longestStreak),
+    earnedBadges: Array.from(earned),
+  };
+}
+
 function buildBackupPayload() {
   return {
     version: 1,
@@ -144,6 +219,7 @@ function buildBackupPayload() {
     settings: getSmartSettings(),
     history: getHistory(),
     customTemplates: getCustomTemplates(),
+    engagement: getEngagementRaw(),
   };
 }
 
@@ -161,6 +237,106 @@ function normalizeSettings(input) {
     lowEndDevice: !!input.lowEndDevice,
     lowEndChecked: !!input.lowEndChecked,
     themeIndex: clampThemeIndex(input.themeIndex || 0),
+    shakeEnabled: input.shakeEnabled !== false,
+    hapticEnabled: input.hapticEnabled !== false,
+    soundEnabled: input.soundEnabled !== false,
+    tonePack: normalizeTonePack(input.tonePack),
+  };
+}
+
+function getEngagementRaw() {
+  const raw = wx.getStorageSync(ENGAGEMENT_KEY);
+  if (!raw || typeof raw !== "object") {
+    return {
+      lastActiveDate: "",
+      currentStreak: 0,
+      longestStreak: 0,
+      earnedBadges: [],
+    };
+  }
+  return {
+    lastActiveDate: `${raw.lastActiveDate || ""}`,
+    currentStreak: Number(raw.currentStreak || 0),
+    longestStreak: Number(raw.longestStreak || 0),
+    earnedBadges: Array.isArray(raw.earnedBadges) ? raw.earnedBadges : [],
+  };
+}
+
+function saveEngagement(data) {
+  wx.setStorageSync(ENGAGEMENT_KEY, data);
+}
+
+function computeBadgeProgress(stats, engagement) {
+  const earned = new Set(engagement.earnedBadges || []);
+  const progress = {
+    first_pick: stats.total >= 1,
+    streak_3: engagement.currentStreak >= 3,
+    streak_7: engagement.currentStreak >= 7,
+    total_10: stats.total >= 10,
+    total_50: stats.total >= 50,
+    week_5: stats.thisWeek >= 5,
+  };
+  const newlyEarned = [];
+  BADGE_DEFS.forEach((badge) => {
+    if (progress[badge.id] && !earned.has(badge.id)) {
+      newlyEarned.push(badge.id);
+      earned.add(badge.id);
+    }
+  });
+  return {
+    earnedBadges: Array.from(earned),
+    newlyEarned,
+    badges: BADGE_DEFS.map((badge) => ({
+      ...badge,
+      earned: earned.has(badge.id),
+      progress: progress[badge.id],
+    })),
+  };
+}
+
+function recordEngagementOnDecision() {
+  const todayKey = formatDateKey(Date.now());
+  const engagement = getEngagementRaw();
+  let currentStreak = 1;
+  if (engagement.lastActiveDate === todayKey) {
+    currentStreak = Math.max(1, engagement.currentStreak);
+  } else if (engagement.lastActiveDate === shiftDateKey(todayKey, -1)) {
+    currentStreak = Math.max(1, engagement.currentStreak + 1);
+  }
+  const longestStreak = Math.max(engagement.longestStreak, currentStreak);
+  const stats = getStats();
+  const badgeState = computeBadgeProgress(stats, {
+    ...engagement,
+    currentStreak,
+    earnedBadges: engagement.earnedBadges,
+  });
+  const next = {
+    lastActiveDate: todayKey,
+    currentStreak,
+    longestStreak,
+    earnedBadges: badgeState.earnedBadges,
+  };
+  saveEngagement(next);
+  return {
+    ...next,
+    stats,
+    badges: badgeState.badges,
+    newlyEarned: badgeState.newlyEarned,
+  };
+}
+
+function getEngagementSummary() {
+  const engagement = getEngagementRaw();
+  const stats = getStats();
+  const badgeState = computeBadgeProgress(stats, engagement);
+  const earnedCount = badgeState.badges.filter((item) => item.earned).length;
+  return {
+    currentStreak: engagement.currentStreak,
+    longestStreak: engagement.longestStreak,
+    earnedCount,
+    totalBadges: BADGE_DEFS.length,
+    badges: badgeState.badges,
+    stats,
   };
 }
 
@@ -214,6 +390,10 @@ function analyzeBackupJson(rawJson, mode = "replace") {
   const incomingHistory = normalizeHistory(parsed.history);
   const incomingTemplates = normalizeCustomTemplates(parsed.customTemplates);
   const incomingSettings = normalizeSettings(parsed.settings);
+  const hasEngagement = parsed.engagement !== undefined && parsed.engagement !== null;
+  const incomingEngagement = hasEngagement
+    ? normalizeEngagement(parsed.engagement)
+    : getEngagementRaw();
   const currentHistory = getHistory();
   const currentTemplates = getCustomTemplates();
 
@@ -234,10 +414,12 @@ function analyzeBackupJson(rawJson, mode = "replace") {
   return {
     ok: true,
     message: "备份内容可用",
+    hasEngagement,
     normalized: {
       history: incomingHistory,
       customTemplates: incomingTemplates,
       settings: incomingSettings,
+      engagement: incomingEngagement,
     },
     preview: {
       mode,
@@ -264,6 +446,7 @@ function importBackupJson(rawJson, mode = "replace") {
   const incomingHistory = analyzed.normalized.history;
   const incomingTemplates = analyzed.normalized.customTemplates;
   const incomingSettings = analyzed.normalized.settings;
+  const incomingEngagement = analyzed.normalized.engagement;
 
   if (mode === "merge") {
     const historyMap = new Map();
@@ -275,9 +458,15 @@ function importBackupJson(rawJson, mode = "replace") {
     getCustomTemplates().forEach((item) => tplMap.set(item.id, item));
     incomingTemplates.forEach((item) => tplMap.set(item.id, item));
     setCustomTemplates(Array.from(tplMap.values()));
+    if (analyzed.hasEngagement) {
+      saveEngagement(mergeEngagement(getEngagementRaw(), incomingEngagement));
+    }
   } else {
     setHistory(incomingHistory);
     setCustomTemplates(incomingTemplates);
+    if (analyzed.hasEngagement) {
+      saveEngagement(incomingEngagement);
+    }
   }
   saveSettings(incomingSettings);
 
@@ -304,6 +493,7 @@ function appendHistory(item) {
   const list = getHistory();
   list.unshift(item);
   saveHistory(list);
+  return recordEngagementOnDecision();
 }
 
 function removeHistory(id) {
@@ -344,6 +534,8 @@ module.exports = {
   shouldPlayAnimation,
   detectLowEndDevice,
   getCurrentTheme,
+  normalizeTonePack,
+  TONE_PACK_OPTIONS,
   getHistory,
   appendHistory,
   removeHistory,
@@ -358,4 +550,7 @@ module.exports = {
   importBackupJson,
   setHistory,
   getStats,
+  getEngagementSummary,
+  recordEngagementOnDecision,
+  BADGE_DEFS,
 };

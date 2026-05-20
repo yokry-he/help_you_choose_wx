@@ -13,7 +13,21 @@ Page({
       primaryLight: "#BB8FD4",
       primaryDark: "#803DA0",
     },
+    engagement: {
+      currentStreak: 0,
+      longestStreak: 0,
+      earnedCount: 0,
+      totalBadges: 0,
+      badges: [],
+    },
     menuItems: [
+      {
+        key: "settings",
+        title: "互动与反馈",
+        desc: "摇一摇、音效、语气包",
+        icon: "⚙️",
+        path: "/pages/settings/settings",
+      },
       {
         key: "theme",
         title: "主题颜色",
@@ -49,8 +63,12 @@ Page({
   },
   onShow() {
     const theme = storage.getCurrentTheme();
+    const engagement = storage.getEngagementSummary();
     applyTabBarTheme(theme);
     applyPageTheme(this, theme, {
+      extraData: {
+        engagement,
+      },
       callback: () => {
         this.syncTabSelected();
       },
